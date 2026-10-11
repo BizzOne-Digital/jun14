@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-dm-sans), system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+  width: 100%;
+  max-width: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  overflow-x: clip;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* Prevent flex/grid children from forcing horizontal scroll */
+img,
+video,
+svg {
+  max-width: 100%;
+}
+
+input,
+textarea,
+select {
+  max-width: 100%;
+}
