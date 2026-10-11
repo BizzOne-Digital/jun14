@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useCart } from "@/context/cart-context";
 
 type Props = {
@@ -19,7 +20,7 @@ export function SiteHeader({ storeName, logo, primaryColor }: Props) {
       style={{ borderBottomColor: `${primaryColor}22` }}
     >
       <div className="mx-auto flex w-full max-w-6xl min-w-0 items-center justify-between gap-2 px-3 py-2.5 sm:gap-4 sm:px-4 sm:py-3">
-        <a
+        <Link
           href="/"
           className="flex min-w-0 flex-1 items-center gap-2 sm:max-w-[min(100%,220px)]"
         >
@@ -41,7 +42,7 @@ export function SiteHeader({ storeName, logo, primaryColor }: Props) {
               {storeName}
             </span>
           )}
-        </a>
+        </Link>
         <nav className="flex shrink-0 items-center gap-1.5 sm:gap-3">
           <a
             href="#menu"

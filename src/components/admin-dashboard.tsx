@@ -10,9 +10,7 @@ export function AdminDashboard() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const lastPaidAtRef = useRef<string>(
-    new Date(Date.now() - 60_000).toISOString()
-  );
+  const lastPaidAtRef = useRef<string>("");
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const playNotification = useCallback(() => {
@@ -64,9 +62,15 @@ export function AdminDashboard() {
   }, [playNotification]);
 
   useEffect(() => {
-    void fetchOrders(true);
-    const id = setInterval(() => void fetchOrders(false), POLL_MS);
-    return () => clearInterval(id);
+    lastPaidAtRef.current = new Date(Date.now() - 60_000).toISOString();
+    const startId = window.setTimeout(() => {
+      void fetchOrders(true);
+    }, 0);
+    const pollId = window.setInterval(() => void fetchOrders(false), POLL_MS);
+    return () => {
+      window.clearTimeout(startId);
+      window.clearInterval(pollId);
+    };
   }, [fetchOrders]);
 
   async function logout() {
